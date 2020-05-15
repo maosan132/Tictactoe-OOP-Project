@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 #rubocop:disable all
-puts "Hello!"
+puts 'Hello!'
 #rubocop:enable all
