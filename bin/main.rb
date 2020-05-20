@@ -24,15 +24,13 @@ puts
 # display game rules
 # ask for player 1 name, converts it to string, creates an instance of Player and assigns it name and X token
 puts 'What\'s 1st player name?'
-first_player = gets.chomp.to_s
+first_player = gets.chomp.to_s.upcase
 puts "#{first_player}, you\'ve got the ╳"
 puts
 # ask for player 2 name, converts it to string, creates an instance of Player and assigns it name and 0 token
 puts 'What\'s 2nd player name?'
-second_player = gets.chomp.to_s
+second_player = gets.chomp.to_s.upcase
 puts "#{second_player}, you\'ve got the █"
-puts
-puts 'Here, you have an empty board:'
 # instantiate a new empty board object (array of 3 arrays) and displays it on screen
 puts
 # Now starts the playing, game asks alternativelly to each player what is their call,
@@ -43,36 +41,52 @@ puts
 # then when game has had 5 moves, start checking if any player has a winning move (from
 # an array of arrays with all winning moves) if not keep game running, then checks also
 # for a tie if all positions has been taken and there's no winner.
-until somebody_won || you_tied
-  moves_counter = 0
+# somebody_won = false
+# you_tied = false
+moves_counter = 1
+puts '<-----Draws an empty board----->'
+puts
+(0..8).each do
   # array_options = [1,2,3,4,5,6,7,8,9]
-  if moves_counter.even?
-    puts "#{first_player}, make a choice from:"
+  if moves_counter.odd?
+    puts "#{first_player}, make a choice"
     # Show available numbers from the updated array of options
+    selection = gets.chomp
+    selection.to_i
     # moves_counter == 0 only checks if it is a number, not if is an available cell, else
     # make mentioned checks, if ok, assings value to cell position else repeat
     # remove number choice from array of options
     # check if player has made a win move,
-    puts "#{first_player} has won! congrats!!"
-    # somebody_won = true
-    # breaks the loop
-    # check if have been reached 9 moves and no winner,
-    puts 'there\'s been a tie'
-    # break the  loop
+    if moves_counter > 4
+      puts "#{first_player} has won! congrats!!" + '--> if there\'s a winning move, of course, now breaks'
+      # somebody_won = true
+      # breaks the loop
+      # check if have been reached 9 moves and no winner,
+      puts 'there\'s been a tie' + '--> if there is a tie, of course, now breaks'
+      # break the  loop
+    end
+    puts ' '
   else
-    puts "#{second_player}, make a choice from:"
+    puts "#{second_player}, make a choice"
     # Show available numbers from the updated array of options
+    selection = gets.chomp
+    selection.to_i
     # make mentioned checks, if ok, assings value to cell position else repeat
     # remove number choice from array of options
     # if player has made a win move,
-    puts "#{second_player} has won! congrats!!"
-    # somebody_won = true
-    # breaks the loop
-    # check if have been reached 9 moves and no winner,
-    puts 'there is been a tie'
-    # break the  loop
+    if moves_counter > 4
+      puts "#{second_player} has won! congrats!!" + '--> if there is a winning move, of course, now breaks'
+      # somebody_won = true
+      # breaks the loop
+      # check if have been reached 9 moves and no winner,
+      puts 'there is been a tie' + '--> if there\'s a tie, of course, now breaks'
+      # break the  loop
+    end
+    puts
   end
   # displays the updated board
+  puts '<-----Draws the updated board----->'
+  puts
   moves_counter += 1
 end
-puts 'Game Over'
+puts '----------Game Over-------------'
