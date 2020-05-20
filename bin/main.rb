@@ -2,18 +2,11 @@
 
 # user_interface
 
-# 1- Present the game to player(s)
-# 2- Draw lines of board
-# 3- Ask for a move and check if it is correct
-# 4- Update the board
-# 5- repeat 3 to 5 until a player has won or both has tied
-
 # things to be heads up:
 # -when the board is full
 # -when there's a three line (winner)
 # -when there's a tie
-
-# Two classes are clear : board and player, maybe the game logic another one
+# Two classes are clear : board and player, and main.rb will contain game logic from start to end.
 
 puts
 puts '           ▛┅┅┅┳┅┅┅┳┅┅▜'
@@ -28,48 +21,58 @@ puts 'Welcome to TIC-TAC-TOE by maosan132'
 puts
 puts '--------- RULES OF GAME: ---------'
 puts
-puts '1 - The objective of the game is make a line of 3 tokens vertically, horizontally or diagonally '
-puts '2 - First player would be assigned the ╳ token and second player the █ token'
-puts '3 - Each turn every other player have a move, it must press a keypad number'
-puts '4 - When all the positions are filled, either there will be a winner or a tie'
-puts 'What\'s your name?'
-# assignment of tokens should be in a player class, I guess
-first_player = gets.chomp
+# display game rules
+# ask for player 1 name, converts it to string, creates an instance of Player and assigns it name and X token
+puts 'What\'s 1st player name?'
+first_player = gets.chomp.to_s
 puts "#{first_player}, you\'ve got the ╳"
 puts
-puts 'what\'s your opponent\'s name?'
-second_player = gets.chomp
+# ask for player 2 name, converts it to string, creates an instance of Player and assigns it name and 0 token
+puts 'What\'s 2nd player name?'
+second_player = gets.chomp.to_s
 puts "#{second_player}, you\'ve got the █"
 puts
 puts 'Here, you have an empty board:'
-# board = [[' ', ' ', ' '], [' ', ' ', ' '],[' ', ' ', ' '] ]
-board = Array.new(3, Array.new(3, ' '))
-# board2 = Array.new(3) { Array.new(3){' '} }
-# puts board
-# next should belong to a class, to follow DRY principle:1
+# instantiate a new empty board object (array of 3 arrays) and displays it on screen
 puts
-puts '         ' + board[0].join(' | ')
-puts '        ———┼———┼———'
-puts '         ' + board[1].join(' | ')
-puts '        ———┼———┼———'
-puts '         ' + board[2].join(' | ')
-puts
-# ends board class
-counter = 0
-move_request = 'Select a numpad key to make your move'
-0.upto(9) do
-  puts move_request
-  move = gets.chomp
-  if counter.even?
-    puts "#{first_player}, you selected " + move
+# Now starts the playing, game asks alternativelly to each player what is their call,
+# and checks if it is a valid number between 1 to 9 (which comes from an array of options)
+# if the choice is not a number or if is a number not available from mentioned array,
+# warns the player to reselect a number, else the choice will be both withdrawed from the
+# array of options and print it to the screen on the corresponding board position,
+# then when game has had 5 moves, start checking if any player has a winning move (from
+# an array of arrays with all winning moves) if not keep game running, then checks also
+# for a tie if all positions has been taken and there's no winner.
+until somebody_won || you_tied
+  moves_counter = 0
+  # array_options = [1,2,3,4,5,6,7,8,9]
+  if moves_counter.even?
+    puts "#{first_player}, make a choice from:"
+    # Show available numbers from the updated array of options
+    # moves_counter == 0 only checks if it is a number, not if is an available cell, else
+    # make mentioned checks, if ok, assings value to cell position else repeat
+    # remove number choice from array of options
+    # check if player has made a win move,
+    puts "#{first_player} has won! congrats!!"
+    # somebody_won = true
+    # breaks the loop
+    # check if have been reached 9 moves and no winner,
+    puts 'there\'s been a tie'
+    # break the  loop
   else
-    puts "#{second_player}, you selected " + move
+    puts "#{second_player}, make a choice from:"
+    # Show available numbers from the updated array of options
+    # make mentioned checks, if ok, assings value to cell position else repeat
+    # remove number choice from array of options
+    # if player has made a win move,
+    puts "#{second_player} has won! congrats!!"
+    # somebody_won = true
+    # breaks the loop
+    # check if have been reached 9 moves and no winner,
+    puts 'there is been a tie'
+    # break the  loop
   end
-  puts
-  counter += 1
-  if counter < 9
-    puts 'Next player, make a move!'
-  else
-    puts '------------> Last move!'
-  end
+  # displays the updated board
+  moves_counter += 1
 end
+puts 'Game Over'
