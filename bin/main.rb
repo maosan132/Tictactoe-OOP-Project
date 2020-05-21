@@ -41,18 +41,20 @@ puts
 # then when game has had 5 moves, start checking if any player has a winning move (from
 # an array of arrays with all winning moves) if not keep game running, then checks also
 # for a tie if all positions has been taken and there's no winner.
-# somebody_won = false
-# you_tied = false
+somebody_won = false
+you_tied = false
 moves_counter = 1
 puts '<-----Draws an empty board----->'
 puts
-(0..8).each do
+until somebody_won || you_tied
+  # here will be a method or loop that counts how many moves has been taken and if they're
+  # 9, it will make the last check for tie-ness. It can't be more than 9 moves in tictactoe.
   # array_options = [1,2,3,4,5,6,7,8,9]
   if moves_counter.odd?
     puts "#{first_player}, make a choice"
     # Show available numbers from the updated array of options
     selection = gets.chomp
-    selection.to_i
+    selection = selection.to_i
     # moves_counter == 0 only checks if it is a number, not if is an available cell, else
     # make mentioned checks, if ok, assings value to cell position else repeat
     # remove number choice from array of options
@@ -70,7 +72,7 @@ puts
     puts "#{second_player}, make a choice"
     # Show available numbers from the updated array of options
     selection = gets.chomp
-    selection.to_i
+    selection = selection.to_i
     # make mentioned checks, if ok, assings value to cell position else repeat
     # remove number choice from array of options
     # if player has made a win move,
