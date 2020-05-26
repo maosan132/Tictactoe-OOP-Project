@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
-# user_interface
+# game_logic
+
+# links to classes inside /lib
+
+require_relative '../lib/board.rb'
 
 # things to be heads up:
 # -when the board is full
