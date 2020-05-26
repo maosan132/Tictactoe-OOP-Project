@@ -14,3 +14,8 @@ def display
   puts ' ' + board[6] + ' │ ' + board[7] + ' │ ' + board[8] + '    ░   7   8   9'
   puts
 end
+
+def update
+  system('clear')
+end
+
