@@ -19,7 +19,7 @@ def cover_image
   puts
   puts 'Welcome to TIC-TAC-TOE by maosan132'
   puts
-end
+end 
 
 new_board = Board.new
 # Separation of concerns
