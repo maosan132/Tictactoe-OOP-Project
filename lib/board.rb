@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :board
+  attr_reader :board
 
   def initialize
 
@@ -22,11 +22,25 @@ class Board
   end
   
   def update(cell_choice, current_player)
-    board[cell_choice-1] = current_player
+    if board[cell_choice-1] == '-'
+      board[cell_choice-1] = current_player
+    else
+      
+    end
+  end
+ 
+  def free_cell?
+  end
+
+  def valid?
+
+  end
+
+  def taken?
+
   end
 
   def tie?
     board.exclude?('-')
   end
- 
 end 

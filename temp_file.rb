@@ -5,14 +5,12 @@ $board = Array.new(9, '-')
 # Tells us who the winner is
 $winner = false
 
-# Tells us who the current player is (X goes first)$current_player = 'X'
-# ------------- Methods ---------------
+$game_is_not_over = true
 
 def play_tictactoe
   display_board
-  game_is_not_over = true
-
-  while game_is_not_over
+  
+  while $game_is_not_over
     game_rolling($current_player)
     check_if_game_over
     switch_player
@@ -37,13 +35,18 @@ end
 def game_rolling(token)
   # player choice
   print 'Choose a cell number from 1 to 9: '
-  cell_choice = gets.chomp
+  cell_choice = gets.chomp.to_i
   
+  def valid?()
+    cell_choice.to_i.between?(1, 9)
+  end
+
+
   valid = false
   while !valid
     unless ['1', '2', '3', '4', '5', '6', '7', '8', '9'].include?(cell_choice)
       print 'Choose a cell number from 1 to 9: '
-      cell_choice = gets.chomp
+      cell_choice = gets.chomp.to_i
     end
 
     # array index
@@ -73,11 +76,11 @@ def check_if_winner
   column_winner = check_columns_for_winner
   diagonal_winner = check_diagonals_for_winner
 
-  if row_winner == true
+  if row_winner != false
     $winner = row_winner ; puts "debug: there is a row match"
-  elsif column_winner == true
+  elsif column_winner != false
     $winner = column_winner ; puts "debug: there is a column match"
-  elsif diagonal_winner == true
+  elsif diagonal_winner != false
     $winner = diagonal_winner ; puts "debug: there is a diagonal match"
   else
     $winner = false
@@ -90,7 +93,7 @@ def check_rows_for_winner
   row_3 = $board[6] == $board[7] && $board[7] == $board[8] && $board[8] != '-'
   puts "debug: checkrows - row1 = #{row_1}, row2 = #{row_2}, row3 = #{row_3}"
 
-  game_is_not_over = false if row_1 || row_2 || row_3
+  $game_is_not_over = false if row_1 || row_2 || row_3
   #  the winner
   if row_1 then $board[0]
   elsif row_2 then $board[3]
@@ -106,7 +109,7 @@ def check_columns_for_winner
   column_3 = $board[2] == $board[5] && $board[5] == $board[8] && $board[8] != '-'
   puts "debug: checkcols - col1 = #{column_1}, col2 = #{column_2}, col3 = #{column_3}"
 
-  game_is_not_over = false if column_1 || column_2 || column_3
+  $game_is_not_over = false if column_1 || column_2 || column_3
 
   if column_1 then $board[0]
   elsif column_2 then $board[1]
@@ -122,7 +125,7 @@ def check_diagonals_for_winner
   diagonal_2 = $board[2] == $board[4] && $board[4] == $board[6] && $board[6] != '-'
   # If any row does have a match, flag that there is a win
 
-  game_is_not_over = false if diagonal_1 || diagonal_2
+  $game_is_not_over = false if diagonal_1 || diagonal_2
   #  the winner
   if diagonal_1 then $board[0]
   elsif diagonal_2 then $board[2]
@@ -134,7 +137,7 @@ end
 
 def check_if_tie
   unless $board.include?('-')
-    game_is_not_over = false
+    $game_is_not_over = false
     puts 'debug: board is full, should break now'
     true
   else

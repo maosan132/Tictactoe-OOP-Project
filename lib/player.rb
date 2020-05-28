@@ -1,9 +1,8 @@
 class Player
-  attr_reader :name, :token
+  attr_reader :x_or_o
 
+  def initialize(x_or_o)
 
-  def initialize(name, token)
-    @name = name
-    @token = token
+    @token = x_or_o
   end
 end
