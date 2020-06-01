@@ -28,19 +28,34 @@ class Board
     puts
   end
   
-  def update(cell_choice, current_player)
-    if board[cell_choice-1] == '-'
-      board[cell_choice-1] = current_player
-    else
-      
+  def update(choice, current_player)
+    if board[choice - 1] == '-'
+      board[choice - 1] = current_player
     end
+
   end
 
   def winner?(current_player)
-    true if board[0] == board[1] && board[1] == board[2] && board[2] != '-'
+    if board[0] == current_player && board[1] == current_player && board[2] == current_player
+      true
+    elsif board[4] == current_player && board[5] == current_player && board[6] == current_player
+      true
+    elsif board[7] == current_player && board[8] == current_player && board[9] == current_player
+      true
+    elsif board[1] == current_player && board[4] == current_player && board[7] == current_player
+      true
+    elsif board[2] == current_player && board[5] == current_player && board[8] == current_player
+      true
+    elsif board[3] == current_player && board[6] == current_player && board[9] == current_player
+      true
+    elsif board[1] == current_player && board[5] == current_player && board[9] == current_player
+      true
+    elsif board[7] == current_player && board[5] == current_player && board[3] == current_player
+      true
+    end
   end
  
-  def free_cell?
+  def free_cell?                      
   end
 
   def valid?
@@ -73,11 +88,11 @@ def cover_image
 end 
 
 $new_board = Board.new
-
+cover_image
 # Separation of concerns
 def presentation
   # new_board = Board.new
-  cover_image
+  
   $new_board.display
 end
 
@@ -87,15 +102,23 @@ end
 
 while true
   presentation
-  print 'Choose a cell number from 1 to 9: '
-  cell_choice = gets.chomp.to_i
-  $new_board.update(cell_choice, 'X')
+  print 'X, Choose a cell number from 1 to 9: '
+  x_cell_choice = gets.chomp.to_i
+  $new_board.update(x_cell_choice, 'X')
+  
+  if $new_board.winner?('X') == true
+    puts 'X wins!'
+    # print 'play again? answer '
+    # play_again = gets.chomp
+    # if play_again == 
+    break
+  else
+    puts 'Good move!'
+  end
   presentation
-  $new_board.winner? ? p 'x wins' : 
-  print 'Choose a cell number from 1 to 9: '
-  cell_choice = gets.chomp.to_i
+  
+  print 'O, Choose a cell number from 1 to 9: '
+  o_cell_choice = gets.chomp.to_i
 
-  $new_board.update(cell_choice, 'O')
-    
+  $new_board.update(o_cell_choice, 'O')
 end
-
