@@ -52,22 +52,29 @@ class Board
       true
     elsif board[6] == current_player && board[4] == current_player && board[4] == current_player
       true
+    else
+      false
     end
   end
- 
-  def free_cell?                      
+
+  def valid_name(name)
+    if name.is_a? Integer || name.size > 2
+      print 'please type a valid name bigger than 2 characters'
+    end
   end
 
-  def valid?
-
+  def valid(choice)
+    unless ['1', '2', '3', '4', '5', '6', '7', '8', '9'].include?(choice)
+      print 'Choose a cell number from 1 to 9: '
+    end
   end
 
-  def taken?
-
+  def taken?(choice)
+    board.include?(choice)
   end
 
   def tie?
-    board.exclude?('-')
+    board.include?('-')
   end
 end 
 
@@ -101,24 +108,36 @@ def clear_and_update
 end
 
 while true
+
   presentation
   print 'X, Choose a cell number from 1 to 9: '
   x_cell_choice = gets.chomp.to_i
   $new_board.update(x_cell_choice, 'X')
   puts
   if $new_board.winner?('X') == true
+    presentation
     puts 'X wins!'
-    # print 'play again? answer '
-    # play_again = gets.chomp
-    # if play_again == 
     break
   else
     puts 'Good move!'
   end
-  presentation
-  
+
+  presentation  
   print 'O, Choose a cell number from 1 to 9: '
   o_cell_choice = gets.chomp.to_i
-
   $new_board.update(o_cell_choice, 'O')
+  puts
+  if $new_board.winner?('O') == true
+    presentationw |
+    puts 'O wins!'
+    break
+  else
+    puts 'Good move!'
+  end
+
+end
+
+
+def game
+  
 end
