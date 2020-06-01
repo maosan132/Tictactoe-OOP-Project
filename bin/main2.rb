@@ -74,7 +74,7 @@ class Board
   end
 
   def tie?
-    board.include?('-')
+    !board.include?('-')
   end
 end 
 
@@ -106,15 +106,15 @@ end
 def clear_and_update
   system('cls')
 end
-
+count = 0
 while true
-
+  
   presentation
   print 'X, Choose a cell number from 1 to 9: '
   x_cell_choice = gets.chomp.to_i
   $new_board.update(x_cell_choice, 'X')
   puts
-  if $new_board.winner?('X') == true
+  if $new_board.winner?('X')
     presentation
     puts 'X wins!'
     break
@@ -122,22 +122,31 @@ while true
     puts 'Good move!'
   end
 
+  if $new_board.tie?
+    puts 'Tie Game!'
+  end
+  
   presentation  
   print 'O, Choose a cell number from 1 to 9: '
   o_cell_choice = gets.chomp.to_i
   $new_board.update(o_cell_choice, 'O')
   puts
-  if $new_board.winner?('O') == true
-    presentationw |
+  if $new_board.winner?('O')
+    presentation
     puts 'O wins!'
-    break
+    return false
   else
     puts 'Good move!'
   end
 
+  # checks if tie
+
+  if $new_board.tie?
+    puts 'Tie Game!'
+  end
+
 end
 
-
-def game
-  
+def turn
+  count.odd? ? turn = 'X' : turn = 'O'
 end
