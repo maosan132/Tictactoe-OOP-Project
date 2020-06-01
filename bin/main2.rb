@@ -38,19 +38,19 @@ class Board
   def winner?(current_player)
     if board[0] == current_player && board[1] == current_player && board[2] == current_player
       true
-    elsif board[4] == current_player && board[5] == current_player && board[6] == current_player
+    elsif board[3] == current_player && board[4] == current_player && board[5] == current_player
       true
-    elsif board[7] == current_player && board[8] == current_player && board[9] == current_player
+    elsif board[6] == current_player && board[7] == current_player && board[8] == current_player
+      true
+    elsif board[0] == current_player && board[3] == current_player && board[6] == current_player
       true
     elsif board[1] == current_player && board[4] == current_player && board[7] == current_player
       true
     elsif board[2] == current_player && board[5] == current_player && board[8] == current_player
       true
-    elsif board[3] == current_player && board[6] == current_player && board[9] == current_player
+    elsif board[0] == current_player && board[4] == current_player && board[8] == current_player
       true
-    elsif board[1] == current_player && board[5] == current_player && board[9] == current_player
-      true
-    elsif board[7] == current_player && board[5] == current_player && board[3] == current_player
+    elsif board[6] == current_player && board[4] == current_player && board[4] == current_player
       true
     end
   end
@@ -105,7 +105,7 @@ while true
   print 'X, Choose a cell number from 1 to 9: '
   x_cell_choice = gets.chomp.to_i
   $new_board.update(x_cell_choice, 'X')
-  
+  puts
   if $new_board.winner?('X') == true
     puts 'X wins!'
     # print 'play again? answer '
