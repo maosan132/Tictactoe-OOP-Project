@@ -5,28 +5,7 @@
 
 require_relative '../lib/board'
 
-class Player
-  attr_reader :name
 
-  def initialize
-    @token_x = 'X'
-    @token_o = 'O'
-  end
-
-  def name(name)
-    @name = name
-  end
-
-  def valid_name(name)
-    if name.is_a? Integer || name.size > 2
-      print 'please type a valid name bigger than 2 characters'
-    end
-  end
-
-  def player_turn
-
-  end
-end
 # Introduce the game to the players
 
 def cover_image
@@ -52,7 +31,7 @@ def presentation
   $new_board.display
 end
 
-def clear_and_update
+def clear_screen
   Gem.win_platform? ? (system "cls") : (system "clear")
 end
 count = 0
@@ -61,8 +40,23 @@ def switch_turn
   $count.odd? ? turn = 'X' : turn = 'O'
 end
 
+print 'Player one, please type your name'
+player_one = Player.new
+player_one = gets.chomp
+if $new_board.valid_name(player_one)
+  print 'Player one, please type a valid name'
+end
+puts "#{player_one}, welcome. The X is yours"
+print 'Player two, please type your name'
+player_two = gets.chomp
+if $new_board.valid_name(player_one)
+  print 'Player two, please type a valid name'
+end
+puts "#{player_two}, welcome. The O is yours"
+
 while game_on
   count += 1
+  # clear_screen
   presentation
   count.even? ? turn = 'X' : turn = 'O'
   puts "turn is #{turn}"
