@@ -64,14 +64,12 @@ class Board
   end
 
   def valid(choice)
-    unless ['1', '2', '3', '4', '5', '6', '7', '8', '9'].include?(choice)
-      print 'Choose a cell number from 1 to 9: '
-    end
+    (1..9).include?(choice)
   end
 
   def taken?(choice)
     # board.include?(choice)
-    board[choice - 1] != '-'
+    puts board[choice - 1] != '-'
   end
 
   def tie?
@@ -79,6 +77,23 @@ class Board
   end
 end 
 
+
+class Player
+  attr_reader :name
+
+  def initialize
+    @token_x = 'X'
+    @token_o = 'O'
+  end
+
+  def name(name)
+    @name = name
+  end
+
+  def player_turn
+    
+  end
+end
 # Introduce the game to the players
 
 def cover_image
@@ -95,6 +110,8 @@ def cover_image
   puts
 end 
 
+
+game_on = true
 $new_board = Board.new
 cover_image
 # Separation of concerns
@@ -108,46 +125,56 @@ def clear_and_update
   system('cls')
 end
 count = 0
-while true
-  
+
+def switch_turn
+  $count.odd? ? turn = 'X' : turn = 'O'
+end
+
+while game_on
+  puts game_on
   presentation
-  print 'X, Choose a cell number from 1 to 9: '
-  x_cell_choice = gets.chomp.to_i
-  $new_board.update(x_cell_choice, 'X')
-  puts
-  if $new_board.winner?('X')
-    presentation
-    puts 'X wins!'
-    break
-  else
-    puts 'Good move!'
-  end
-
-  if $new_board.tie?
-    puts 'Tie Game!'
-  end
-  
-  presentation  
-  print 'O, Choose a cell number from 1 to 9: '
-  o_cell_choice = gets.chomp.to_i
-  $new_board.update(o_cell_choice, 'O')
-  puts
-  if $new_board.winner?('O')
-    presentation
-    puts 'O wins!'
-    return false
-  else
-    puts 'Good move!'
-  end
-
-  # checks if tie
-
-  if $new_board.tie?
-    puts 'Tie Game!'
-  end
-
-end
-
-def turn
   count.odd? ? turn = 'X' : turn = 'O'
+  print "#{turn}, Choose a cell number from 1 to 9: "
+  cell_choice = gets.chomp.to_i
+
+  puts 'valid:'
+  puts $new_board.valid(cell_choice)
+  puts 'taken:'
+  puts $new_board.taken?(cell_choice)
+
+  $new_board.update(cell_choice, turn)
+  puts
+  
+  if $new_board.winner?(turn)
+    presentation
+    puts "#{turn} wins!"
+    game_on = false
+  else
+    puts 'Good move!'
+  end
+
+  if $new_board.tie?
+    puts 'Tie Game!'
+    game_on = false
+  end
+  count += 1
+
 end
+
+
+
+=begin
+intro
+ask for player names
+validate names
+manage turns
+ask for X or O to move!
+validate option if is 1-9
+is it taken? if doesnt, insert option into array
+update board
+won? if do, end game
+if not, tie?
+if so end game
+end
+=end
+
