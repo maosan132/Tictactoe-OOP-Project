@@ -39,28 +39,20 @@ class Board
 
   def winner?(current_player)
     if board[0] == current_player && board[1] == current_player && board[2] == current_player
-      puts "h1"
       true
     elsif board[3] == current_player && board[4] == current_player && board[5] == current_player
-      puts "h2"
       true
     elsif board[6] == current_player && board[7] == current_player && board[8] == current_player
-      puts "h3"
       true
     elsif board[0] == current_player && board[3] == current_player && board[6] == current_player
-      puts "v1"
       true
     elsif board[1] == current_player && board[4] == current_player && board[7] == current_player
-      puts "v2"
       true
     elsif board[2] == current_player && board[5] == current_player && board[8] == current_player
-      puts "v3"
       true
     elsif board[0] == current_player && board[4] == current_player && board[8] == current_player
-      puts "d1"
       true
     elsif board[6] == current_player && board[4] == current_player && board[2] == current_player
-      puts "d2"
       true
     else
       false
@@ -121,11 +113,10 @@ end
 
 game_on = true
 $new_board = Board.new
-cover_image
-# Separation of concerns
-def presentation
-  # new_board = Board.new
 
+cover_image
+
+def presentation
   $new_board.display
 end
 
@@ -140,8 +131,6 @@ end
 
 while game_on
   count += 1
-  puts "count is #{count}"
-  puts "game_on is #{game_on}"
   presentation
   count.even? ? turn = 'X' : turn = 'O'
   puts "turn is #{turn}"
@@ -153,7 +142,6 @@ while game_on
     print "#{turn}, Choose a cell number from 1 to 9: "
     cell_choice = gets.chomp.to_i
   end
-  puts 'taken:'
   
   taken = $new_board.taken?(cell_choice)
   if taken
@@ -162,24 +150,20 @@ while game_on
   end
   puts
 
-  puts "after update"
-
   $new_board.update(cell_choice, turn)
   puts
-  
-  
+
   if count > 4 && $new_board.winner?(turn)
-    puts "winner process: #{$new_board.winner?(turn)}"
     presentation
     puts "and the winner is #{turn}"
-    
+
     break
   end
 
 
   if count == 8 || $new_board.tie?
     presentation
-    puts 'tie!'
+    puts 'game tie!'
     break
   end
 
