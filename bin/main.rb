@@ -3,7 +3,7 @@
 
 # links to classes inside /lib
 
-# require_relative '../lib/board.rb'
+require_relative '../lib/board'
 
 class Player
   attr_reader :name
@@ -52,9 +52,9 @@ def presentation
   $new_board.display
 end
 
-# def clear_and_update
-#   system('cls')
-# end
+def clear_and_update
+  Gem.win_platform? ? (system "cls") : (system "clear")
+end
 count = 0
 
 def switch_turn
