@@ -29,28 +29,38 @@ class Board
   end
   
   def update(choice, current_player)
-    if board[choice - 1] == '-'
-      board[choice - 1] = current_player
-    end
+    board[choice - 1] = current_player
+ 
+  end
 
+  def free_cells
+    
   end
 
   def winner?(current_player)
     if board[0] == current_player && board[1] == current_player && board[2] == current_player
+      puts "h1"
       true
     elsif board[3] == current_player && board[4] == current_player && board[5] == current_player
+      puts "h2"
       true
     elsif board[6] == current_player && board[7] == current_player && board[8] == current_player
+      puts "h3"
       true
     elsif board[0] == current_player && board[3] == current_player && board[6] == current_player
+      puts "v1"
       true
     elsif board[1] == current_player && board[4] == current_player && board[7] == current_player
+      puts "v2"
       true
     elsif board[2] == current_player && board[5] == current_player && board[8] == current_player
+      puts "v3"
       true
     elsif board[0] == current_player && board[4] == current_player && board[8] == current_player
+      puts "d1"
       true
-    elsif board[6] == current_player && board[4] == current_player && board[4] == current_player
+    elsif board[6] == current_player && board[4] == current_player && board[2] == current_player
+      puts "d2"
       true
     else
       false
@@ -131,12 +141,16 @@ def switch_turn
 end
 
 while game_on
-  puts game_on
+  count += 1
+  puts "count is #{count}"
+  puts "game_on is #{game_on}"
   presentation
   count.even? ? turn = 'X' : turn = 'O'
   puts "turn is #{turn}"
   print "#{turn}, Choose a cell number from 1 to 9: "
   cell_choice = gets.chomp.to_i
+  
+
   
   valid = $new_board.valid(cell_choice)
   if !valid 
@@ -150,20 +164,28 @@ while game_on
     print 'that number is not available, choose other one: '
     cell_choice = gets.chomp.to_i
   end
-  puts 
+  puts
 
-  # if count > 4 || $new_board.winner?(turn)
-  #   puts "and the winner is #{turn}"
-  #   break
-  # end
-
-  if count == 9 || $new_board.tie?
-    puts 'tie!'
-    break
-  end
+  puts "after update"
 
   $new_board.update(cell_choice, turn)
   puts
+  
+  
+  if count > 4 && $new_board.winner?(turn)
+    puts "winner process: #{$new_board.winner?(turn)}"
+    presentation
+    puts "and the winner is #{turn}"
+    
+    break
+  end
+
+
+  if count == 8 || $new_board.tie?
+    presentation
+    puts 'tie!'
+    break
+  end
 =begin
   if $new_board.winner?(turn)
     presentation
@@ -178,7 +200,7 @@ while game_on
     game_on = false
   end
 =end
-  count += 1
+
 
 end
 
