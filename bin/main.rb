@@ -57,11 +57,6 @@ class Board
     end
   end
 
-  def valid_name(name)
-    if name.is_a? Integer || name.size > 2
-      print 'please type a valid name bigger than 2 characters'
-    end
-  end
 
   def valid(choice)
     (1..9).include?(choice)
@@ -69,14 +64,13 @@ class Board
 
   def taken?(choice)
     # board.include?(choice)
-    puts board[choice - 1] != '-'
+    board[choice - 1] != '-'
   end
 
   def tie?
     !board.include?('-')
   end
 end 
-
 
 class Player
   attr_reader :name
@@ -88,6 +82,12 @@ class Player
 
   def name(name)
     @name = name
+  end
+
+  def valid_name(name)
+    if name.is_a? Integer || name.size > 2
+      print 'please type a valid name bigger than 2 characters'
+    end
   end
 
   def player_turn
@@ -121,9 +121,9 @@ def presentation
   $new_board.display
 end
 
-def clear_and_update
-  system('cls')
-end
+# def clear_and_update
+#   system('cls')
+# end
 count = 0
 
 def switch_turn
@@ -133,18 +133,38 @@ end
 while game_on
   puts game_on
   presentation
-  count.odd? ? turn = 'X' : turn = 'O'
+  count.even? ? turn = 'X' : turn = 'O'
+  puts "turn is #{turn}"
   print "#{turn}, Choose a cell number from 1 to 9: "
   cell_choice = gets.chomp.to_i
-
-  puts 'valid:'
-  puts $new_board.valid(cell_choice)
+  
+  valid = $new_board.valid(cell_choice)
+  if !valid 
+    print "#{turn}, Choose a cell number from 1 to 9: "
+    cell_choice = gets.chomp.to_i
+  end
   puts 'taken:'
-  puts $new_board.taken?(cell_choice)
+  
+  taken = $new_board.taken?(cell_choice)
+  if taken
+    print 'that number is not available, choose other one: '
+    cell_choice = gets.chomp.to_i
+  end
+  puts 
+
+  # if count > 4 || $new_board.winner?(turn)
+  #   puts "and the winner is #{turn}"
+  #   break
+  # end
+
+  if count == 9 || $new_board.tie?
+    puts 'tie!'
+    break
+  end
 
   $new_board.update(cell_choice, turn)
   puts
-  
+=begin
   if $new_board.winner?(turn)
     presentation
     puts "#{turn} wins!"
@@ -157,6 +177,7 @@ while game_on
     puts 'Tie Game!'
     game_on = false
   end
+=end
   count += 1
 
 end
