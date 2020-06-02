@@ -1,98 +1,153 @@
 #!/usr/bin/env ruby
-
 # game_logic
 
 # links to classes inside /lib
 
-require_relative '../lib/board.rb'
+# require_relative '../lib/board.rb'
 
-# things to be heads up:
-# -when the board is full
-# -when there's a three line (winner)
-# -when there's a tie
-# Two classes are clear : board and player, and main.rb will contain game logic from start to end.
+class Board
+  attr_reader :board
 
-puts
-puts '           ▛┅┅┅┳┅┅┅┳┅┅▜'
-puts '           ┇ 7 ┇ 8 ┇ 9 ┇'
-puts '           ┣┅┅┅╋┅┅┅╋┅┅┅┫'
-puts '           ┇ 4 ┇ 5 ┇ 6 ┇'
-puts '           ┣┅┅┅╋┅┅┅╋┅┅┅┫'
-puts '           ┇ 1 ┇ 2 ┇ 3 ┇'
-puts '           ▙┅┅┅┻┅┅┅┻┅┅▟'
-puts
-puts 'Welcome to TIC-TAC-TOE by maosan132'
-puts
-puts '--------- RULES OF GAME: ---------'
-puts
-# display game rules
-# ask for player 1 name, converts it to string, creates an instance of Player and assigns it name and X token
-puts 'What\'s 1st player name?'
-first_player = gets.chomp.to_s.upcase
-puts "#{first_player}, you\'ve got the ╳"
-puts
-# ask for player 2 name, converts it to string, creates an instance of Player and assigns it name and 0 token
-puts 'What\'s 2nd player name?'
-second_player = gets.chomp.to_s.upcase
-puts "#{second_player}, you\'ve got the █"
-# instantiate a new empty board object (array of 3 arrays) and displays it on screen
-puts
-# Now starts the playing, game asks alternativelly to each player what is their call,
-# and checks if it is a valid number between 1 to 9 (which comes from an array of options)
-# if the choice is not a number or if is a number not available from mentioned array,
-# warns the player to reselect a number, else the choice will be both withdrawed from the
-# array of options and print it to the screen on the corresponding board position,
-# then when game has had 5 moves, start checking if any player has a winning move (from
-# an array of arrays with all winning moves) if not keep game running, then checks also
-# for a tie if all positions has been taken and there's no winner.
-somebody_won = false
-you_tied = false
-moves_counter = 1
-puts '<-----Draws an empty board----->'
-puts
-until somebody_won || you_tied
-  # here will be a method or loop that counts how many moves has been taken and if they're
-  # 9, it will make the last check for tie-ness. It can't be more than 9 moves in tictactoe.
-  # array_options = [1,2,3,4,5,6,7,8,9]
-  if moves_counter.odd?
-    puts "#{first_player}, make a choice"
-    # Show available numbers from the updated array of options
-    selection = gets.chomp
-    selection = selection.to_i
-    # moves_counter == 0 only checks if it is a number, not if is an available cell, else
-    # make mentioned checks, if ok, assings value to cell position else repeat
-    # remove number choice from array of options
-    # check if player has made a win move,
-    if moves_counter > 4
-      puts "#{first_player} has won! congrats!!" + '--> if there\'s a winning move, of course, now breaks'
-      # somebody_won = true
-      # breaks the loop
-      # check if have been reached 9 moves and no winner,
-      puts 'there\'s been a tie' + '--> if there is a tie, of course, now breaks'
-      # break the  loop
-    end
-    puts ' '
-  else
-    puts "#{second_player}, make a choice"
-    # Show available numbers from the updated array of options
-    selection = gets.chomp
-    selection = selection.to_i
-    # make mentioned checks, if ok, assings value to cell position else repeat
-    # remove number choice from array of options
-    # if player has made a win move,
-    if moves_counter > 4
-      puts "#{second_player} has won! congrats!!" + '--> if there is a winning move, of course, now breaks'
-      # somebody_won = true
-      # breaks the loop
-      # check if have been reached 9 moves and no winner,
-      puts 'there is been a tie' + '--> if there\'s a tie, of course, now breaks'
-      # break the  loop
-    end
+  def initialize
+
+    # @board = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
+    # @board = %W(\s \s \s \s \s \s \s \s \s)
+    play_again
+  end
+  
+  def play_again
+    @board = Array.new(9, '-')
+  end
+  def display
+    puts
+    puts ' ' + board[0] + ' │ ' + board[1] + ' │ ' + board[2] + '    ░   1   2   3'
+    puts '———┼———┼———' + (' ' * 3) + '░'
+    puts ' ' + board[3] + ' │ ' + board[4] + ' │ ' + board[5] + '    ░   4   5   6'
+    puts '———┼———┼———' + (' ' * 3) + '░'
+    puts ' ' + board[6] + ' │ ' + board[7] + ' │ ' + board[8] + '    ░   7   8   9'
     puts
   end
-  # displays the updated board
-  puts '<-----Draws the updated board----->'
+  
+  def update(choice, current_player)
+    if board[choice - 1] == '-'
+      board[choice - 1] = current_player
+    end
+
+  end
+
+  def winner?(current_player)
+    if board[0] == current_player && board[1] == current_player && board[2] == current_player
+      true
+    elsif board[3] == current_player && board[4] == current_player && board[5] == current_player
+      true
+    elsif board[6] == current_player && board[7] == current_player && board[8] == current_player
+      true
+    elsif board[0] == current_player && board[3] == current_player && board[6] == current_player
+      true
+    elsif board[1] == current_player && board[4] == current_player && board[7] == current_player
+      true
+    elsif board[2] == current_player && board[5] == current_player && board[8] == current_player
+      true
+    elsif board[0] == current_player && board[4] == current_player && board[8] == current_player
+      true
+    elsif board[6] == current_player && board[4] == current_player && board[4] == current_player
+      true
+    else
+      false
+    end
+  end
+
+  def valid_name(name)
+    if name.is_a? Integer || name.size > 2
+      print 'please type a valid name bigger than 2 characters'
+    end
+  end
+
+  def valid(choice)
+    unless ['1', '2', '3', '4', '5', '6', '7', '8', '9'].include?(choice)
+      print 'Choose a cell number from 1 to 9: '
+    end
+  end
+
+  def taken?(choice)
+    # board.include?(choice)
+    board[choice - 1] != '-'
+  end
+
+  def tie?
+    !board.include?('-')
+  end
+end 
+
+# Introduce the game to the players
+
+def cover_image
   puts
-  moves_counter += 1
+  puts '           ▛┅┅┅┳┅┅┅┳┅┅▜'
+  puts '           ┇ 1 ┇ 2 ┇ 3 ┇'
+  puts '           ┣┅┅┅╋┅┅┅╋┅┅┅┫'
+  puts '           ┇ 4 ┇ 5 ┇ 6 ┇'
+  puts '           ┣┅┅┅╋┅┅┅╋┅┅┅┫'
+  puts '           ┇ 7 ┇ 8 ┇ 9 ┇'
+  puts '           ▙┅┅┅┻┅┅┅┻┅┅▟'
+  puts
+  puts 'Welcome to TIC-TAC-TOE by maosan132'
+  puts
+end 
+
+$new_board = Board.new
+cover_image
+# Separation of concerns
+def presentation
+  # new_board = Board.new
+  
+  $new_board.display
 end
-puts '----------Game Over-------------'
+
+def clear_and_update
+  system('cls')
+end
+count = 0
+while true
+  
+  presentation
+  print 'X, Choose a cell number from 1 to 9: '
+  x_cell_choice = gets.chomp.to_i
+  $new_board.update(x_cell_choice, 'X')
+  puts
+  if $new_board.winner?('X')
+    presentation
+    puts 'X wins!'
+    break
+  else
+    puts 'Good move!'
+  end
+
+  if $new_board.tie?
+    puts 'Tie Game!'
+  end
+  
+  presentation  
+  print 'O, Choose a cell number from 1 to 9: '
+  o_cell_choice = gets.chomp.to_i
+  $new_board.update(o_cell_choice, 'O')
+  puts
+  if $new_board.winner?('O')
+    presentation
+    puts 'O wins!'
+    return false
+  else
+    puts 'Good move!'
+  end
+
+  # checks if tie
+
+  if $new_board.tie?
+    puts 'Tie Game!'
+  end
+
+end
+
+def turn
+  count.odd? ? turn = 'X' : turn = 'O'
+end
