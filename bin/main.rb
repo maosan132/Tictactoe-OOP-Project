@@ -14,7 +14,7 @@ class Board
     # @board = %W(\s \s \s \s \s \s \s \s \s)
     play_again
   end
-  
+
   def play_again
     @board = Array.new(9, '-')
   end
@@ -27,14 +27,14 @@ class Board
     puts ' ' + board[6] + ' │ ' + board[7] + ' │ ' + board[8] + '    ░   7   8   9'
     puts
   end
-  
+
   def update(choice, current_player)
     board[choice - 1] = current_player
- 
+
   end
 
   def free_cells
-    
+
   end
 
   def winner?(current_player)
@@ -66,7 +66,6 @@ class Board
       false
     end
   end
-
 
   def valid(choice)
     (1..9).include?(choice)
@@ -101,7 +100,7 @@ class Player
   end
 
   def player_turn
-    
+
   end
 end
 # Introduce the game to the players
@@ -118,8 +117,7 @@ def cover_image
   puts
   puts 'Welcome to TIC-TAC-TOE by maosan132'
   puts
-end 
-
+end
 
 game_on = true
 $new_board = Board.new
@@ -127,7 +125,7 @@ cover_image
 # Separation of concerns
 def presentation
   # new_board = Board.new
-  
+
   $new_board.display
 end
 
@@ -149,9 +147,7 @@ while game_on
   puts "turn is #{turn}"
   print "#{turn}, Choose a cell number from 1 to 9: "
   cell_choice = gets.chomp.to_i
-  
 
-  
   valid = $new_board.valid(cell_choice)
   if !valid 
     print "#{turn}, Choose a cell number from 1 to 9: "
@@ -186,38 +182,5 @@ while game_on
     puts 'tie!'
     break
   end
-=begin
-  if $new_board.winner?(turn)
-    presentation
-    puts "#{turn} wins!"
-    game_on = false
-  else
-    puts 'Good move!'
-  end
-
-  if $new_board.tie?
-    puts 'Tie Game!'
-    game_on = false
-  end
-=end
-
 
 end
-
-
-
-=begin
-intro
-ask for player names
-validate names
-manage turns
-ask for X or O to move!
-validate option if is 1-9
-is it taken? if doesnt, insert option into array
-update board
-won? if do, end game
-if not, tie?
-if so end game
-end
-=end
-
