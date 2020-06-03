@@ -6,7 +6,6 @@
 require_relative '../lib/board'
 require_relative '../lib/player'
 
-
 # Introduce the game to the players
 
 def cover_image
@@ -24,23 +23,15 @@ def cover_image
 end
 
 game_on = true
-$new_board = Board.new
-
-cover_image
-
-def presentation
-  $new_board.display
-end
-
-def clear_screen
-  Gem.win_platform? ? (system "cls") : (system "clear")
-end
+new_board = Board.new
 count = 0
 
-def switch_turn
-  $count.odd? ? turn = 'X' : turn = 'O'
+def update_screen
+  Gem.win_platform? ? (system 'cls') : (system 'clear')
+  cover_image
 end
 
+update_screen
 print 'Player one, please type your name: '
 player_name = gets.chomp
 player_one = Player.new(player_name)
@@ -50,52 +41,49 @@ print 'Player two, please type your name: '
 player_name = gets.chomp
 player_two = Player.new(player_name)
 puts "Welcome, #{player_two.name}. The O is yours"
-# if $new_board.valid_name
-#   print 'Player two, please type a valid name'
-# end
 
 while game_on
+  update_screen
+  new_board.display
   count += 1
-  clear_screen
-  presentation
+
   if count.odd?
     turn = 'X'
     player = player_one.name
   else
-    turn = 'O' 
+    turn = 'O'
     player = player_two.name
   end
   puts "turn is #{turn}"
   print "#{player}, Choose a cell number from 1 to 9: "
   cell_choice = gets.chomp.to_i
 
-  valid = $new_board.valid(cell_choice)
-  if !valid
+  valid = new_board.valid(cell_choice)
+  unless valid
     print "#{turn}, Choose a cell number from 1 to 9: "
     cell_choice = gets.chomp.to_i
   end
 
-  taken = $new_board.taken?(cell_choice)
+  taken = new_board.taken?(cell_choice)
   if taken
     print 'that number is not available, choose other one: '
     cell_choice = gets.chomp.to_i
   end
   puts
 
-  $new_board.update(cell_choice, turn)
+  new_board.update(cell_choice, turn)
   puts
 
-  if count > 4 && $new_board.winner?(turn)
-    presentation
+  if new_board.horizontal_winner?(turn) || new_board.vertical_winner?(turn) || new_board.diagonal_winner?(turn)
+    update_screen
     puts "and the winner is #{turn}"
-    game_on = false
+    break
   end
 
+  next unless new_board.tie?
 
-  if count == 8 || $new_board.tie?
-    presentation
-    puts 'game tie!'
-    game_on = false
-  end
+  update_screen
+  puts 'game tie!'
+  break
 
 end
