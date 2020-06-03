@@ -4,6 +4,7 @@
 # links to classes inside /lib
 
 require_relative '../lib/board'
+require_relative '../lib/player'
 
 
 # Introduce the game to the players
@@ -40,35 +41,40 @@ def switch_turn
   $count.odd? ? turn = 'X' : turn = 'O'
 end
 
-print 'Player one, please type your name'
-player_one = Player.new
-player_one = gets.chomp
-if $new_board.valid_name(player_one)
-  print 'Player one, please type a valid name'
-end
-puts "#{player_one}, welcome. The X is yours"
-print 'Player two, please type your name'
-player_two = gets.chomp
-if $new_board.valid_name(player_one)
-  print 'Player two, please type a valid name'
-end
-puts "#{player_two}, welcome. The O is yours"
+print 'Player one, please type your name: '
+player_name = gets.chomp
+player_one = Player.new(player_name)
+puts "Welcome, #{player_one.name}. The X is yours"
+
+print 'Player two, please type your name: '
+player_name = gets.chomp
+player_two = Player.new(player_name)
+puts "Welcome, #{player_two.name}. The O is yours"
+# if $new_board.valid_name
+#   print 'Player two, please type a valid name'
+# end
 
 while game_on
   count += 1
-  # clear_screen
+  clear_screen
   presentation
-  count.even? ? turn = 'X' : turn = 'O'
+  if count.odd?
+    turn = 'X'
+    player = player_one.name
+  else
+    turn = 'O' 
+    player = player_two.name
+  end
   puts "turn is #{turn}"
-  print "#{turn}, Choose a cell number from 1 to 9: "
+  print "#{player}, Choose a cell number from 1 to 9: "
   cell_choice = gets.chomp.to_i
 
   valid = $new_board.valid(cell_choice)
-  if !valid 
+  if !valid
     print "#{turn}, Choose a cell number from 1 to 9: "
     cell_choice = gets.chomp.to_i
   end
-  
+
   taken = $new_board.taken?(cell_choice)
   if taken
     print 'that number is not available, choose other one: '
@@ -82,15 +88,14 @@ while game_on
   if count > 4 && $new_board.winner?(turn)
     presentation
     puts "and the winner is #{turn}"
-
-    
+    game_on = false
   end
 
 
   if count == 8 || $new_board.tie?
     presentation
     puts 'game tie!'
-    break
+    game_on = false
   end
 
 end
