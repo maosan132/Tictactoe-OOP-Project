@@ -59,6 +59,7 @@ class Board
     else
       false
     end
+  end
 
   def valid(choice)
     (1..9).include?(choice)
