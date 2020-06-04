@@ -2,17 +2,13 @@
 
 > Development of the tic-tac-toe game using Ruby language and OOP approach.
 
-![screenshot](./app_screenshot.png)
-
-Additional description about the project and its features.
-
 ## Built With
 
 - Ruby 2.6.5p114
 
 ### Prerequisites
 
-Ruby 2+
+Ruby 2.6+
 
 ### Install
 
