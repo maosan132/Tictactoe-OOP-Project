@@ -2,8 +2,6 @@ class Board
   attr_reader :board
 
   def initialize
-    # @board = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
-    # @board = %W(\s \s \s \s \s \s \s \s \s)
     play_again
   end
 
@@ -24,8 +22,6 @@ class Board
   def update(choice, player)
     board[choice - 1] = player
   end
-
-  def free_cells; end
 
   def horizontal_winner?(player)
     if board[0] == player && board[1] == player && board[2] == player
