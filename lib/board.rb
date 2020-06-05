@@ -62,7 +62,6 @@ class Board
   end
 
   def taken?(choice)
-    # board.include?(choice)
     board[choice - 1] != '-'
   end
 
