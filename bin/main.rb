@@ -1,14 +1,10 @@
 #!/usr/bin/env ruby
-# game_logic
-
-# links to classes inside /lib
 
 require_relative '../lib/board'
 require_relative '../lib/player'
 
-# Introduce the game to the players
-class output_helper(output)
-    puts output
+def output(n)
+  puts n
 end
 
 def cover_image
@@ -36,14 +32,17 @@ end
 
 update_screen
 print 'Player one, please type your name: '
-player_name = gets.chomp
+player_name = gets.chomp.capitalize
 player_one = Player.new(player_name)
 puts "Welcome, #{player_one.name}. The X is yours"
-
+puts
 print 'Player two, please type your name: '
-player_name = gets.chomp
+player_name = gets.chomp.capitalize
 player_two = Player.new(player_name)
 puts "Welcome, #{player_two.name}. The O is yours"
+puts
+prints "let's start TICTACTOE!"
+sleep 3.75
 
 while game_on
   update_screen
@@ -79,7 +78,7 @@ while game_on
 
   if new_board.win?(turn)
     update_screen
-    puts "and the winner is #{turn}"
+    puts turn == 'X' ? "and the winner is #{player_one.name}" : "and the winner is #{player_two.name}"
     break
   end
 
