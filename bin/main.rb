@@ -7,6 +7,9 @@ require_relative '../lib/board'
 require_relative '../lib/player'
 
 # Introduce the game to the players
+class output_helper(output)
+    puts output
+end
 
 def cover_image
   puts
@@ -74,7 +77,7 @@ while game_on
   new_board.update(cell_choice, turn)
   puts
 
-  if new_board.horizontal_winner?(turn) || new_board.vertical_winner?(turn) || new_board.diagonal_winner?(turn)
+  if new_board.win?(turn)
     update_screen
     puts "and the winner is #{turn}"
     break
@@ -87,3 +90,4 @@ while game_on
   break
 
 end
+  
