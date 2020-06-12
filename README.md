@@ -23,11 +23,11 @@ Open a bash console and type:
 
 The objective of the game is to get a line of three (3) symbols before your opponent.
 
-Rules:
+Instructions:
 
--Players will take turns placing their X or O in empty cells on the Board. Use the grid at the right side to know what number corresponds to each cell
--The first Player to have make a line of three symbols, whether it be vertical, horizontal or diagonal win the game.
--If neither Player was able to Win the game will result in a Draw/Tie.
+ 1. Players will take turns placing their X or O in empty cells on the Board. Use the grid at the right side to know what number corresponds to each cell
+ 2. The first Player to have make a line of three symbols, whether it be vertical, horizontal or diagonal win the game.
+ 3. If neither Player was able to Win the game will result in a Draw/Tie.
 
 ## Authors
 
