@@ -3,34 +3,41 @@
 require_relative '../lib/board'
 require_relative '../lib/player'
 
-def output(n)
-  puts n
+def draw(grid)
+  puts grid
+end
+
+def shows_title
+  puts '-' * 35
+  puts '      TIC-TAC-TOE by maosan132'
+  puts '-' * 35
 end
 
 def cover_image
   puts
   puts '           ▛┅┅┅┳┅┅┅┳┅┅▜'
-  puts '           ┇ 1 ┇ 2 ┇ 3 ┇'
+  puts '           ┇ ﾒ ┇ ░ ┇ ░ ┇'
   puts '           ┣┅┅┅╋┅┅┅╋┅┅┅┫'
-  puts '           ┇ 4 ┇ 5 ┇ 6 ┇'
+  puts '           ┇ ░ ┇ ﾒ ┇ ░ ┇'
   puts '           ┣┅┅┅╋┅┅┅╋┅┅┅┫'
-  puts '           ┇ 7 ┇ 8 ┇ 9 ┇'
+  puts '           ┇ ░ ┇ ░ ┇ ﾒ ┇'
   puts '           ▙┅┅┅┻┅┅┅┻┅┅▟'
   puts
   puts 'Welcome to TIC-TAC-TOE by maosan132'
   puts
 end
 
+def update_screen
+  Gem.win_platform? ? (system 'cls') : (system 'clear')
+end
+
 game_on = true
 new_board = Board.new
 count = 0
-
-def update_screen
-  Gem.win_platform? ? (system 'cls') : (system 'clear')
-  cover_image
-end
-
+cover_image
+sleep 2
 update_screen
+shows_title
 print 'Player one, please type your name: '
 player_name = gets.chomp.capitalize
 player_one = Player.new(player_name)
@@ -41,11 +48,12 @@ player_name = gets.chomp.capitalize
 player_two = Player.new(player_name)
 puts "Welcome, #{player_two.name}. The O is yours"
 puts
-prints "let's start TICTACTOE!"
-sleep 3.75
+print "let's start TICTACTOE!"
+sleep 1
 
 while game_on
   update_screen
+  shows_title
   new_board.display
   count += 1
 
@@ -56,7 +64,8 @@ while game_on
     turn = 'O'
     player = player_two.name
   end
-  puts "turn is #{turn}"
+  puts "    Playing #{turn}"
+  puts
   print "#{player}, Choose a cell number from 1 to 9: "
   cell_choice = gets.chomp.to_i
 
@@ -72,21 +81,29 @@ while game_on
     cell_choice = gets.chomp.to_i
   end
   puts
-
   new_board.update(cell_choice, turn)
   puts
 
   if new_board.win?(turn)
-    update_screen
-    puts turn == 'X' ? "and the winner is #{player_one.name}" : "and the winner is #{player_two.name}"
+    new_board.display
+    puts
+    puts '-' * 35
+    puts turn == 'X' ? "   The winner is #{player_one.name}" : "The winner is #{player_two.name}"
+    puts '-' * 35
+    puts
+    sleep 1
     break
   end
 
   next unless new_board.tie?
 
-  update_screen
+  new_board.display
+  puts
+  puts '-' * 35
   puts 'game tie!'
+  puts '-' * 35
+  puts
+  sleep 1
   break
 
 end
-  

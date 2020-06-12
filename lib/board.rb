@@ -1,5 +1,3 @@
-require_relative '../bin/main'
-
 class Board
   attr_reader :board
 
@@ -12,19 +10,21 @@ class Board
   end
 
   def display
-    puts
-    x =  "' ' + board[0] + ' │ ' + board[1] + ' │ ' + board[2] + '    ░   1   2   3'"
-    output(x)
-    puts '———┼———┼———' + (' ' * 3) + '░'
-    puts ' ' + board[3] + ' │ ' + board[4] + ' │ ' + board[5] + '    ░   4   5   6'
-    puts '———┼———┼———' + (' ' * 3) + '░'
-    puts ' ' + board[6] + ' │ ' + board[7] + ' │ ' + board[8] + '    ░   7   8   9'
-    puts
+    draw('  ┌———┬———┬———┐     ░')
+    draw("  | #{board[0]} | #{board[1]} │ #{board[2]} │     ░   1   2   3")
+    draw('  ├———┼———┼———┤     ░')
+    draw("  | #{board[3]} | #{board[4]} │ #{board[5]} │     ░   4   5   6")
+    draw('  ├———┼———┼———┤     ░')
+    draw("  | #{board[6]} | #{board[7]} │ #{board[8]} │     ░   7   8   9")
+    draw('  └———┴———┴———┘     ░')
   end
 
   def update(choice, player)
     board[choice - 1] = player
   end
+
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
 
   def horizontal_winner?(player)
     if board[0] == player && board[1] == player && board[2] == player
@@ -59,6 +59,9 @@ class Board
       false
     end
   end
+
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def win?(turn)
     horizontal_winner?(turn) || vertical_winner?(turn) || diagonal_winner?(turn)
