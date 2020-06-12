@@ -1,3 +1,4 @@
+
 # Tic-Tac-Toe
 
 > Development of the tic-tac-toe game using Ruby language and OOP approach.
@@ -8,14 +9,15 @@
 
 ### Prerequisites
 
-Ruby 2.6+
+ - Ruby 2.6+
 
 ### Install
 
-Open a bash console and:
-- git clone https://github.com/maosan132/Tictactoe-OOP-Project.git0
-- cd Tictactoe-OOP-Project
-- bin/main.rb
+Open a bash console and type:
+
+ - [ ] git clone https://github.com/maosan132/Tictactoe-OOP-Project.git0
+ - [ ] cd Tictactoe-OOP-Project
+ - [ ] bin/main.rb
 
 ### How to play
 
