@@ -1,3 +1,5 @@
+require_relative '../bin/main'
+
 class Board
   attr_reader :board
 
@@ -11,7 +13,8 @@ class Board
 
   def display
     puts
-    puts ' ' + board[0] + ' │ ' + board[1] + ' │ ' + board[2] + '    ░   1   2   3'
+    x =  "' ' + board[0] + ' │ ' + board[1] + ' │ ' + board[2] + '    ░   1   2   3'"
+    output(x)
     puts '———┼———┼———' + (' ' * 3) + '░'
     puts ' ' + board[3] + ' │ ' + board[4] + ' │ ' + board[5] + '    ░   4   5   6'
     puts '———┼———┼———' + (' ' * 3) + '░'
@@ -55,6 +58,10 @@ class Board
     else
       false
     end
+  end
+
+  def win?(turn)
+    horizontal_winner?(turn) || vertical_winner?(turn) || diagonal_winner?(turn)
   end
 
   def valid(choice)
