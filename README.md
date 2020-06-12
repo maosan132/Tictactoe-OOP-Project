@@ -1,57 +1,40 @@
-# Project Name
 
-> One paragraph statement about the project.
+# Tic-Tac-Toe
 
-![screenshot](./app_screenshot.png)
-
-Additional description about the project and its features.
+> Development of the tic-tac-toe game using Ruby language and OOP approach.
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
-
-## Live Demo
-
-[Live Demo Link](https://livedemo.com)
-
-
-## Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
-To get a local copy up and running follow these simple example steps.
+- Ruby 2.6.5p114
 
 ### Prerequisites
 
-### Setup
+ - Ruby 2.6+
 
 ### Install
 
-### Usage
+Open a bash console and type:
 
-### Run tests
+ - [ ] git clone https://github.com/maosan132/Tictactoe-OOP-Project.git0
+ - [ ] cd Tictactoe-OOP-Project
+ - [ ] bin/main.rb
 
-### Deployment
+### How to play
 
+The objective of the game is to get a line of three (3) symbols before your opponent.
 
+Instructions:
+
+ 1. Players will take turns placing their X or O in empty cells on the Board. Use the grid at the right side to know what number corresponds to each cell
+ 2. The first Player to have make a line of three symbols, whether it be vertical, horizontal or diagonal win the game.
+ 3. If neither Player was able to Win the game will result in a Draw/Tie.
 
 ## Authors
 
-👤 **Author1**
+👤 **Mauricio Santos**
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: [@maosan132](https://github.com/maosan132)
+- Linkedin: [@maosan132](https://www.linkedin.com/in/mauricio-santos-a7292910/)
 
 ## 🤝 Contributing
 
