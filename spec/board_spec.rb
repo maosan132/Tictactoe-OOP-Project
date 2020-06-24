@@ -54,13 +54,15 @@ describe Board do
 
   describe '#diagonal_winner?(player)' do
     it 'should return true when get a diagonal line of symbol X' do
-      gameboard.update(0, 'X')
-      gameboard.update(4, 'X')
+      gameboard.update(1, 'X')
+      gameboard.update(5, 'X')
+      gameboard.update(9, 'X')
       expect(gameboard.diagonal_winner?('X')).to eq(true)
     end
     it 'should return false when not get a diagonal line of symbol X' do
-      gameboard.update(0, 'Y')
-      gameboard.update(4, 'X')
+      gameboard.update(7, 'Y')
+      gameboard.update(5, 'X')
+      gameboard.update(3, 'Y')
       expect(gameboard.diagonal_winner?('X')).to eq(false)
     end
   end
