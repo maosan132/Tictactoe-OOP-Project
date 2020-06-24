@@ -6,6 +6,11 @@ require 'pry'
 describe Board do
   let(:gameboard) { Board.new }
   # let(:board)
+  describe '#play_again' do
+    it 'should output an array of 9 dashes' do
+      expect(gameboard.play_again).to eq(%w[- - - - - - - - -])
+    end
+  end
 
   describe '#display' do
     it 'should output a grid for the board' do
