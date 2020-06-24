@@ -66,17 +66,30 @@ describe Board do
   end
 
   describe '#valid(choice)' do
-    it 'description' do
+    it 'should return true only if player chose a digit' do
+      expect(gameboard.valid(1)).to be(true)
+      expect(gameboard.valid(2)).to be(true)
+      expect(gameboard.valid(3)).to be(true)
+      expect(gameboard.valid(4)).to be(true)
+      expect(gameboard.valid(5)).to be(true)
+      expect(gameboard.valid(6)).to be(true)
+      expect(gameboard.valid(7)).to be(true)
+      expect(gameboard.valid(8)).to be(true)
+      expect(gameboard.valid(9)).to be(true)
+    end
+    it 'should return false if player doesn\'t chose a digit' do
+      expect(gameboard.valid(10)).to be(false)
+      expect(gameboard.valid('apple')).to be(false)
     end
   end
 
-  describe '#taken?(choice)' do
-    it 'description' do
-    end
-  end
+  # describe '#taken?(choice)' do
+  #   it 'description' do
+  #   end
+  # end
 
-  describe 'tie?' do
-    it 'description' do
-    end
-  end
+  # describe 'tie?' do
+  #   it 'description' do
+  #   end
+  # end
 end
