@@ -7,8 +7,10 @@ describe Board do
       expect(21).to eq(21)
     end
   end
+
   describe "#display" do
     it "should output a grid for the board" do
+      alias draw puts
       expect(board.display).to eq(print "  ┌———┬———┬———┐     ░
         | - | - │ - │     ░   1   2   3
         ├———┼———┼———┤     ░
@@ -19,11 +21,12 @@ describe Board do
     end
   end
 
-  # describe '#horizontal_winner?()' do
-  #   it 'should return true when horizontal winner' do
-  #     expect.to eq
-  #   end
-  #   it 'should return false when not horizontal winner' do
-  #   end
-  # end
+  describe "#horizontal_winner?(player)" do
+    it "should return true when all three board[] positions are the same" do
+      expect(21).to eq(21)
+    end
+    it "should return false when not horizontal winner" do
+      expect(21).to eq(21)
+    end
+  end
 end
