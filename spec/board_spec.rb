@@ -1,7 +1,5 @@
 require './lib/board'
 require 'pry'
-# let (:turn_x) { 'X' }
-# let ()
 
 describe Board do
   let(:gameboard) { Board.new }
@@ -35,7 +33,6 @@ describe Board do
       gameboard.update(1, 'Y')
       gameboard.update(2, 'X')
       gameboard.update(3, 'Y')
-      # binding.pry
       expect(gameboard.horizontal_winner?('X')).to eq(false)
     end
   end
@@ -51,7 +48,6 @@ describe Board do
       gameboard.update(1, 'Y')
       gameboard.update(4, 'X')
       gameboard.update(7, 'Y')
-      # binding.pry
       expect(gameboard.vertical_winner?('X')).to eq(false)
     end
   end
@@ -65,7 +61,6 @@ describe Board do
     it 'should return false when not get a diagonal line of symbol X' do
       gameboard.update(0, 'Y')
       gameboard.update(4, 'X')
-      # binding.pry
       expect(gameboard.diagonal_winner?('X')).to eq(false)
     end
   end
