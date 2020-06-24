@@ -85,13 +85,20 @@ describe Board do
     end
   end
 
-  # describe '#taken?(choice)' do
-  #   it 'description' do
-  #   end
-  # end
+  describe '#taken?(choice)' do
+    it 'should return true if cell position is not a dash' do
+      gameboard.update(1, 'X')
+      expect(gameboard.taken?(1)).to eq(true)
+    end
+    it 'should return false if cell position is a dash' do
+      gameboard.update(1, '-')
+      expect(gameboard.taken?(1)).to eq(false)
+    end
+  end
 
   # describe 'tie?' do
   #   it 'description' do
+  #    expect(subject).to eq(value)
   #   end
   # end
 end
