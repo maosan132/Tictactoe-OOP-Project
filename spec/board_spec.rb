@@ -19,16 +19,17 @@ describe Board do
   end
 
   describe '#horizontal_winner?(player)' do
-    it 'should return true when all three board[] positions are the same' do
+    it 'should return true when get a horizontal line of symbol X' do
       gameboard.update(1, 'X')
       gameboard.update(2, 'X')
       gameboard.update(3, 'X')
-      # @board[0] = @board[1] = @board[2] = 'X'
-      # expect(gameboard.board[0] && gameboard.board[1] && gameboard.board[2] == 'X').to eq(true)
       expect(gameboard.horizontal_winner?('X')).to eq(true)
     end
-    # it 'should return false when not horizontal winner' do
-
-    # end
+    it 'should return false when not get a horizontal line of symbol X' do
+      gameboard.update(4, 'Y')
+      gameboard.update(5, 'X')
+      gameboard.update(6, 'Y')
+      expect(gameboard.horizontal_winner?('Y')).to eq(false)
+    end
   end
 end
