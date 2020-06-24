@@ -64,4 +64,19 @@ describe Board do
       expect(gameboard.diagonal_winner?('X')).to eq(false)
     end
   end
+
+  describe '#valid(choice)' do
+    it 'description' do
+    end
+  end
+
+  describe '#taken?(choice)' do
+    it 'description' do
+    end
+  end
+
+  describe 'tie?' do
+    it 'description' do
+    end
+  end
 end
