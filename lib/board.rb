@@ -79,6 +79,3 @@ class Board
     !board.include?('-')
   end
 end
-
-new_board = Board.new
-new_board.display
