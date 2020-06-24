@@ -6,7 +6,7 @@ class Board
   end
 
   def play_again
-    @board = Array.new(9, "-")
+    @board = Array.new(9, '-')
   end
 
   def display
@@ -72,11 +72,11 @@ class Board
   end
 
   def taken?(choice)
-    board[choice - 1] != "-"
+    board[choice - 1] != '-'
   end
 
   def tie?
-    !board.include?("-")
+    !board.include?('-')
   end
 end
 
