@@ -6,17 +6,17 @@ class Board
   end
 
   def play_again
-    @board = Array.new(9, '-')
+    @board = Array.new(9, "-")
   end
 
   def display
-    draw('  ┌———┬———┬———┐     ░')
-    draw("  | #{board[0]} | #{board[1]} │ #{board[2]} │     ░   1   2   3")
-    draw('  ├———┼———┼———┤     ░')
-    draw("  | #{board[3]} | #{board[4]} │ #{board[5]} │     ░   4   5   6")
-    draw('  ├———┼———┼———┤     ░')
-    draw("  | #{board[6]} | #{board[7]} │ #{board[8]} │     ░   7   8   9")
-    draw('  └———┴———┴———┘     ░')
+    puts("  ┌———┬———┬———┐     ░")
+    puts("  | #{board[0]} | #{board[1]} │ #{board[2]} │     ░   1   2   3")
+    puts("  ├———┼———┼———┤     ░")
+    puts("  | #{board[3]} | #{board[4]} │ #{board[5]} │     ░   4   5   6")
+    puts("  ├———┼———┼———┤     ░")
+    puts("  | #{board[6]} | #{board[7]} │ #{board[8]} │     ░   7   8   9")
+    puts("  └———┴———┴———┘     ░")
   end
 
   def update(choice, player)
@@ -72,10 +72,13 @@ class Board
   end
 
   def taken?(choice)
-    board[choice - 1] != '-'
+    board[choice - 1] != "-"
   end
 
   def tie?
-    !board.include?('-')
+    !board.include?("-")
   end
 end
+
+new_board = Board.new
+new_board.display
