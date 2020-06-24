@@ -1,18 +1,13 @@
 require './lib/board'
-let (:turn_x) { 'X' }
-let ()
+# let (:turn_x) { 'X' }
+# let ()
 
 describe Board do
   let(:gameboard) { Board.new }
-  describe '#' do
-    it 'should' do # for sake
-      expect(21).to eq(21)
-    end
-  end
+  # let(:board)
 
   describe '#display' do
     it 'should output a grid for the board' do
-      alias_method :draw, :puts
       expect(gameboard.display).to eq(print("  ┌———┬———┬———┐     ░
         | - | - │ - │     ░   1   2   3
         ├———┼———┼———┤     ░
@@ -25,12 +20,15 @@ describe Board do
 
   describe '#horizontal_winner?(player)' do
     it 'should return true when all three board[] positions are the same' do
-      gameboard.board[0], gameboard.board[1], board[2] = 3
+      gameboard.update(1, 'X')
+      gameboard.update(2, 'X')
+      gameboard.update(3, 'X')
+      # @board[0] = @board[1] = @board[2] = 'X'
+      # expect(gameboard.board[0] && gameboard.board[1] && gameboard.board[2] == 'X').to eq(true)
+      expect(gameboard.horizontal_winner?('X')).to eq(true)
+    end
+    # it 'should return false when not horizontal winner' do
 
-      expect(gameboard.horizontal_winner?('X')).to eq(21)
-    end
-    it 'should return false when not horizontal winner' do
-      expect(21).to eq(21)
-    end
+    # end
   end
 end
