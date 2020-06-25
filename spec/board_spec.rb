@@ -2,12 +2,12 @@ require './lib/board'
 
 describe Board do
   let(:gameboard) { Board.new }
-    describe '#play_again' do
+  describe '#play_again' do
     it 'should output an array of 9 dashes' do
       expect(gameboard.play_again).to eq(%w[- - - - - - - - -])
     end
   end
-    
+ 
   describe '#horizontal_winner?(player)' do
     it 'should return true when get a horizontal line of symbol X' do
       gameboard.update(1, 'X')
@@ -84,9 +84,9 @@ describe Board do
 
   describe 'tie?' do
     it 'Board is filled up, no winner, it is a tie' do
-      gameboard.update(1, 'X');  gameboard.update(2, 'O');  gameboard.update(3, 'O');
-      gameboard.update(4, 'O');  gameboard.update(5, 'X');  gameboard.update(6, 'X');
-      gameboard.update(7, 'X');  gameboard.update(8, 'O');  gameboard.update(9, 'O');
+      gameboard.update(1, 'X');  gameboard.update(2, 'O');  gameboard.update(3, 'O')
+      gameboard.update(4, 'O');  gameboard.update(5, 'X');  gameboard.update(6, 'X')
+      gameboard.update(7, 'X');  gameboard.update(8, 'O');  gameboard.update(9, 'O')
       expect(gameboard.tie?).to eq(true)
     end
   end
