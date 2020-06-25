@@ -3,10 +3,6 @@
 require_relative '../lib/board'
 require_relative '../lib/player'
 
-def draw(grid)
-  puts grid
-end
-
 def shows_title
   puts '-' * 35
   puts '      TIC-TAC-TOE by maosan132'
@@ -105,5 +101,4 @@ while game_on
   puts
   sleep 1
   break
-
 end
