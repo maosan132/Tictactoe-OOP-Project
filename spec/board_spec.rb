@@ -1,5 +1,4 @@
 require './lib/board'
-require 'pry'
 
 describe Board do
   let(:gameboard) { Board.new }
