@@ -9,47 +9,59 @@ describe Board do
   end
 
   describe '#horizontal_winner?(player)' do
-    it 'should return true when get a horizontal line of symbol X' do
+    it 'returns true when the first horizontal row gets filled with X symbols' do
       gameboard.update(1, 'X')
       gameboard.update(2, 'X')
       gameboard.update(3, 'X')
       expect(gameboard.horizontal_winner?('X')).to eq(true)
     end
-    it 'should return false when not get a horizontal line of symbol X' do
-      gameboard.update(1, 'Y')
-      gameboard.update(2, 'X')
-      gameboard.update(3, 'Y')
-      expect(gameboard.horizontal_winner?('X')).to eq(false)
+    it 'returns true when the second horizontal row gets filled with X symbols' do
+      gameboard.update(4, 'X')
+      gameboard.update(5, 'X')
+      gameboard.update(6, 'X')
+      expect(gameboard.horizontal_winner?('X')).to eq(true)
+    end
+    it 'returns true when the third horizontal row gets filled with X symbols' do
+      gameboard.update(7, 'X')
+      gameboard.update(8, 'X')
+      gameboard.update(9, 'X')
+      expect(gameboard.horizontal_winner?('X')).to eq(true)
     end
   end
 
   describe '#vertical_winner?(player)' do
-    it 'should return true when get a vertical line of symbol X' do
+    it 'returns true when the first vertical column gets filled with X symbols' do
       gameboard.update(1, 'X')
       gameboard.update(4, 'X')
       gameboard.update(7, 'X')
       expect(gameboard.vertical_winner?('X')).to eq(true)
     end
-    it 'should return false when not get a vertical line of symbol X' do
-      gameboard.update(1, 'Y')
-      gameboard.update(4, 'X')
-      gameboard.update(7, 'Y')
-      expect(gameboard.vertical_winner?('X')).to eq(false)
+    it 'returns true when the second vertical column gets filled with X symbols' do
+      gameboard.update(2, 'X')
+      gameboard.update(5, 'X')
+      gameboard.update(8, 'X')
+      expect(gameboard.vertical_winner?('X')).to eq(true)
+    end
+    it 'returns true when the last vertical column gets filled with X symbols' do
+      gameboard.update(3, 'X')
+      gameboard.update(6, 'X')
+      gameboard.update(9, 'X')
+      expect(gameboard.vertical_winner?('X')).to eq(true)
     end
   end
 
   describe '#diagonal_winner?(player)' do
-    it 'should return true when get a diagonal line of symbol X' do
+    it 'returns true when the first diagonal line gets filled with X symbols' do
       gameboard.update(1, 'X')
       gameboard.update(5, 'X')
       gameboard.update(9, 'X')
       expect(gameboard.diagonal_winner?('X')).to eq(true)
     end
-    it 'should return false when not get a diagonal line of symbol X' do
-      gameboard.update(7, 'Y')
+    it 'returns true when the second diagonal line gets filled with X symbols' do
+      gameboard.update(7, 'X')
       gameboard.update(5, 'X')
-      gameboard.update(3, 'Y')
-      expect(gameboard.diagonal_winner?('X')).to eq(false)
+      gameboard.update(3, 'X')
+      expect(gameboard.diagonal_winner?('X')).to eq(true)
     end
   end
 
